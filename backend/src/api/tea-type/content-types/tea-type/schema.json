@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tea_types",
+  "info": {
+    "singularName": "tea-type",
+    "pluralName": "tea-types",
+    "displayName": "Tea type"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "teas": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tea.tea",
+      "mappedBy": "tea_types"
+    }
+  }
+}

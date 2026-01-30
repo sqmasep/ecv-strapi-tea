@@ -1,0 +1,54 @@
+{
+  "kind": "collectionType",
+  "collectionName": "teas",
+  "info": {
+    "singularName": "tea",
+    "pluralName": "teas",
+    "displayName": "Tea"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "excerpt": {
+      "type": "string"
+    },
+    "infusionTime": {
+      "type": "integer",
+      "default": 0
+    },
+    "temperature": {
+      "type": "integer"
+    },
+    "dose": {
+      "type": "string"
+    },
+    "tea_types": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tea-type.tea-type",
+      "inversedBy": "teas"
+    },
+    "seo": {
+      "type": "component",
+      "component": "shared.seo",
+      "repeatable": false
+    },
+    "dynamicZone": {
+      "type": "dynamiczone",
+      "components": [
+        "dynamic-zone.illustration-section"
+      ]
+    }
+  }
+}

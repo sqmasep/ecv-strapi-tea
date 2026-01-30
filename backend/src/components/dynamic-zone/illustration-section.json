@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_dynamic_zone_illustration_sections",
+  "info": {
+    "displayName": "IllustrationSection"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "component",
+      "component": "blocks.title",
+      "repeatable": false
+    },
+    "paragraph": {
+      "type": "component",
+      "component": "blocks.paragraph",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

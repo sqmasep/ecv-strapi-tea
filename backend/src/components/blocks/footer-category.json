@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_blocks_footer_categories",
+  "info": {
+    "displayName": "FooterCategory"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

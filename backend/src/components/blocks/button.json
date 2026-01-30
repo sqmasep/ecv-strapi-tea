@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_blocks_buttons",
+  "info": {
+    "displayName": "Button"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "variant": {
+      "type": "enumeration",
+      "enum": [
+        "primary",
+        "secondary"
+      ]
+    },
+    "isLink": {
+      "type": "boolean"
+    },
+    "link": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "isLink"
+            },
+            true
+          ]
+        }
+      },
+      "component": "blocks.link",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

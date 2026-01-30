@@ -1,0 +1,7 @@
+/**
+ * tea-type service
+ */
+
+import { factories } from '@strapi/strapi';
+
+export default factories.createCoreService('api::tea-type.tea-type');
