@@ -9,6 +9,8 @@ export async function Navbar() {
       <div className="container mx-auto">
         <Link href="/">{navbar.brand}</Link>
         {/* <pre>{JSON.stringify(navbar, null, 2)}</pre> */}
+
+        <Link href="/teas">Teas</Link>
       </div>
     </div>
   );
