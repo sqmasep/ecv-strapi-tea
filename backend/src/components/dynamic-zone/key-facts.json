@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_dynamic_zone_key_facts_sections",
+  "info": {
+    "displayName": "KeyFacts"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "facts": {
+      "type": "component",
+      "component": "blocks.key-fact",
+      "repeatable": true,
+      "required": true
+    }
+  },
+  "config": {}
+}

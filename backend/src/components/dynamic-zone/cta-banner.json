@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_dynamic_zone_cta_banners",
+  "info": {
+    "displayName": "CtaBanner"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "link": {
+      "type": "component",
+      "component": "blocks.link",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

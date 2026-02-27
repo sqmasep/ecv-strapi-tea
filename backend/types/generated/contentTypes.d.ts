@@ -534,7 +534,14 @@ export interface ApiTeaTea extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     dose: Schema.Attribute.String;
     dynamicZone: Schema.Attribute.DynamicZone<
-      ['dynamic-zone.illustration-section']
+      [
+        'dynamic-zone.illustration-section',
+        'dynamic-zone.rich-text',
+        'dynamic-zone.gallery',
+        'dynamic-zone.cta-banner',
+        'dynamic-zone.key-facts',
+        'dynamic-zone.quote',
+      ]
     >;
     excerpt: Schema.Attribute.String;
     images: Schema.Attribute.Media<

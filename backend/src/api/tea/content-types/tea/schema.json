@@ -26,12 +26,7 @@
     "images": {
       "type": "media",
       "multiple": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "infusionTime": {
       "type": "integer",
@@ -57,7 +52,12 @@
     "dynamicZone": {
       "type": "dynamiczone",
       "components": [
-        "dynamic-zone.illustration-section"
+        "dynamic-zone.illustration-section",
+        "dynamic-zone.rich-text",
+        "dynamic-zone.gallery",
+        "dynamic-zone.cta-banner",
+        "dynamic-zone.key-facts",
+        "dynamic-zone.quote"
       ]
     },
     "users": {

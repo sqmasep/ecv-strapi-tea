@@ -1,7 +1,10 @@
-"use client";
-
-import dynamic from "next/dynamic";
 import React from "react";
+import { IllustrationSection } from "./illustration-section";
+import { RichText } from "./rich-text";
+import { Gallery } from "./gallery";
+import { CtaBanner } from "./cta-banner";
+import { KeyFacts } from "./key-facts";
+import { Quote } from "./quote";
 
 interface DynamicZoneComponent {
   __component: string;
@@ -11,20 +14,22 @@ interface DynamicZoneComponent {
 }
 
 interface Props {
-  dynamicZone: DynamicZoneComponent[];
+  dynamicZone?: DynamicZoneComponent[] | null;
 }
 
-const componentMapping: { [key: string]: any } = {
-  // "shared.card": dynamic(() => import("./card").then(mod => mod.Card)),
-  // "shared.paragraph": dynamic(() =>
-  //   import("./paragraph").then(mod => mod.Paragraph),
-  // ),
-  // "dynamic-zone.illustration-section": dynamic(() =>
-  //   import("./illustration-section").then(mod => mod.IllustrationSection),
-  // ),
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const componentMapping: Record<string, React.ComponentType<any>> = {
+  "dynamic-zone.illustration-section": IllustrationSection,
+  "dynamic-zone.rich-text": RichText,
+  "dynamic-zone.gallery": Gallery,
+  "dynamic-zone.cta-banner": CtaBanner,
+  "dynamic-zone.key-facts": KeyFacts,
+  "dynamic-zone.quote": Quote,
 };
 
 const DynamicZoneManager: React.FC<Props> = ({ dynamicZone }) => {
+  if (!dynamicZone?.length) return null;
+
   return (
     <div>
       {dynamicZone.map((componentData, index) => {

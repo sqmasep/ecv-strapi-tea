@@ -23,6 +23,17 @@ export interface BlocksFooterCategory extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksKeyFact extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_key_facts';
+  info: {
+    displayName: 'KeyFact';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    value: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface BlocksLink extends Struct.ComponentSchema {
   collectionName: 'components_blocks_links';
   info: {
@@ -58,6 +69,29 @@ export interface BlocksTitle extends Struct.ComponentSchema {
   };
 }
 
+export interface DynamicZoneCtaBanner extends Struct.ComponentSchema {
+  collectionName: 'components_dynamic_zone_cta_banners';
+  info: {
+    displayName: 'CtaBanner';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    link: Schema.Attribute.Component<'blocks.link', false>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface DynamicZoneGallery extends Struct.ComponentSchema {
+  collectionName: 'components_dynamic_zone_galleries';
+  info: {
+    displayName: 'Gallery';
+  };
+  attributes: {
+    caption: Schema.Attribute.String;
+    images: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
+  };
+}
+
 export interface DynamicZoneIllustrationSection extends Struct.ComponentSchema {
   collectionName: 'components_dynamic_zone_illustration_sections';
   info: {
@@ -66,6 +100,39 @@ export interface DynamicZoneIllustrationSection extends Struct.ComponentSchema {
   attributes: {
     paragraph: Schema.Attribute.Component<'blocks.paragraph', false>;
     title: Schema.Attribute.Component<'blocks.title', false>;
+  };
+}
+
+export interface DynamicZoneKeyFacts extends Struct.ComponentSchema {
+  collectionName: 'components_dynamic_zone_key_facts_sections';
+  info: {
+    displayName: 'KeyFacts';
+  };
+  attributes: {
+    facts: Schema.Attribute.Component<'blocks.key-fact', true> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface DynamicZoneQuote extends Struct.ComponentSchema {
+  collectionName: 'components_dynamic_zone_quotes';
+  info: {
+    displayName: 'Quote';
+  };
+  attributes: {
+    author: Schema.Attribute.String;
+    text: Schema.Attribute.Text & Schema.Attribute.Required;
+  };
+}
+
+export interface DynamicZoneRichText extends Struct.ComponentSchema {
+  collectionName: 'components_dynamic_zone_rich_texts';
+  info: {
+    displayName: 'RichText';
+  };
+  attributes: {
+    content: Schema.Attribute.Blocks & Schema.Attribute.Required;
   };
 }
 
@@ -145,10 +212,16 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'blocks.button': BlocksButton;
       'blocks.footer-category': BlocksFooterCategory;
+      'blocks.key-fact': BlocksKeyFact;
       'blocks.link': BlocksLink;
       'blocks.paragraph': BlocksParagraph;
       'blocks.title': BlocksTitle;
+      'dynamic-zone.cta-banner': DynamicZoneCtaBanner;
+      'dynamic-zone.gallery': DynamicZoneGallery;
       'dynamic-zone.illustration-section': DynamicZoneIllustrationSection;
+      'dynamic-zone.key-facts': DynamicZoneKeyFacts;
+      'dynamic-zone.quote': DynamicZoneQuote;
+      'dynamic-zone.rich-text': DynamicZoneRichText;
       'layout.footer': LayoutFooter;
       'layout.navbar': LayoutNavbar;
       'shared.open-graph': SharedOpenGraph;

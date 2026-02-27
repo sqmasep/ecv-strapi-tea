@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_dynamic_zone_quotes",
+  "info": {
+    "displayName": "Quote"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "text",
+      "required": true
+    },
+    "author": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

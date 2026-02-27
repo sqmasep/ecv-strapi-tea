@@ -183,10 +183,13 @@ export async function getUser() {
       "🔵 GET USER - Fetching from Strapi:",
       `${STRAPI_URL}/api/users/me?populate=favorites`,
     );
-    const res = await fetch(`${STRAPI_URL}/api/users/me?populate=favorites`, {
-      headers: { Authorization: `Bearer ${token}` },
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `${STRAPI_URL}/api/users/me?populate[favorites][populate][0]=images`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+        cache: "no-store",
+      },
+    );
 
     console.log("🟡 GET USER - Status Strapi:", res.status);
 
