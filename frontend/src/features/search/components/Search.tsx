@@ -122,35 +122,53 @@ export function Search() {
         onChange={handleSearchChange}
         onFocus={handleInputFocus}
         onKeyDown={handleKeyDown}
+        placeholder="Rechercher un thé…"
+        className="bg-secondary/60 border-border placeholder:text-muted-foreground/60 text-sm"
       />
 
       {showResults && (
-        <div className="absolute top-full left-0 w-full bg-white border">
-          {error && <div className="px-3 py-2 text-sm">{error}</div>}
-
-          {isLoading && <div className="px-3 py-2 text-sm">Searching…</div>}
-
-          {showEmptyState && (
-            <div className="px-3 py-2 text-sm">No results.</div>
+        <div className="absolute top-[calc(100%+6px)] left-0 w-72 bg-card border border-border rounded-xl shadow-lg overflow-hidden z-50">
+          {error && (
+            <div className="px-4 py-3 text-sm text-destructive">{error}</div>
           )}
 
-          {!isLoading &&
-            !error &&
-            displayedResults.map(result => (
-              <Link
-                href={`/teas/${result.slug}`}
-                key={result.id}
-                className="block px-3 py-2 text-sm hover:bg-zinc-50"
-                onClick={() => toggleShowResults(false)}
-              >
-                {result.name}
-              </Link>
-            ))}
+          {isLoading && (
+            <div className="px-4 py-3 text-sm text-muted-foreground">
+              Recherche…
+            </div>
+          )}
+
+          {showEmptyState && (
+            <div className="px-4 py-5 text-sm text-muted-foreground text-center">
+              Aucun résultat pour <strong>&ldquo;{query}&rdquo;</strong>
+            </div>
+          )}
+
+          {!isLoading && !error && displayedResults.length > 0 && (
+            <div className="py-1">
+              {displayedResults.map(result => (
+                <Link
+                  href={`/teas/${result.slug}`}
+                  key={result.id}
+                  className="flex items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-primary/8 transition-colors"
+                  onClick={() => toggleShowResults(false)}
+                >
+                  <span className="text-base">🍵</span>
+                  {result.name}
+                </Link>
+              ))}
+            </div>
+          )}
 
           {shouldShowExpand && (
-            <div className="p-2">
-              <Button onClick={handleExpandClick} className="w-full">
-                Show More
+            <div className="px-3 pb-3">
+              <Button
+                onClick={handleExpandClick}
+                variant="outline"
+                size="sm"
+                className="w-full"
+              >
+                Voir plus
               </Button>
             </div>
           )}

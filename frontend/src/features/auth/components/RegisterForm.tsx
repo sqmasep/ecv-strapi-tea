@@ -12,34 +12,55 @@ export function RegisterForm() {
   const [state, action] = useActionState(register, { error: "" });
 
   return (
-    <div className="container mx-auto min-h-screen grid place-content-center">
-      {state.error && <p className="text-red-500 mb-4">{state.error}</p>}
+    <div className="min-h-[80vh] flex items-center justify-center px-4 bg-linear-to-br from-primary/5 via-background to-accent/10">
+      <div className="w-full max-w-sm bg-card border border-border rounded-2xl shadow-md p-8">
+        <div className="text-center mb-8">
+          <span className="text-4xl block mb-3">🍃</span>
+          <h1 className="text-2xl font-bold text-foreground">Rejoignez-nous</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Créez votre espace thé
+          </p>
+        </div>
 
-      <h1 className="text-xl font-bold">Register</h1>
-      <Form action={action} className="mt-4 flex flex-col gap-4">
-        <Input type="email" name="email" placeholder="Email" required />
-        <Input name="username" placeholder="Username" required />
-        <Input
-          type="password"
-          name="password"
-          placeholder="Password"
-          required
-        />
-        <Input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm password"
-          required
-        />
-        <RegisterButton />
-      </Form>
+        {state.error && (
+          <div className="mb-4 px-4 py-3 bg-destructive/10 border border-destructive/20 text-destructive text-sm rounded-lg">
+            {state.error}
+          </div>
+        )}
 
-      <p className="mt-4 text-center">
-        Already have an account?{" "}
-        <Link href="/login" className="underline text-blue-300">
-          Log in
-        </Link>
-      </p>
+        <Form action={action} className="flex flex-col gap-4">
+          <Input
+            type="email"
+            name="email"
+            placeholder="Adresse e-mail"
+            required
+          />
+          <Input name="username" placeholder="Nom d'utilisateur" required />
+          <Input
+            type="password"
+            name="password"
+            placeholder="Mot de passe"
+            required
+          />
+          <Input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirmer le mot de passe"
+            required
+          />
+          <RegisterButton />
+        </Form>
+
+        <p className="mt-6 text-center text-sm text-muted-foreground">
+          Déjà un compte ?{" "}
+          <Link
+            href="/login"
+            className="text-primary font-medium hover:underline"
+          >
+            Se connecter
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
@@ -49,7 +70,7 @@ function RegisterButton() {
 
   return (
     <Button type="submit" disabled={pending}>
-      {pending ? "Registering..." : "Register"}
+      {pending ? "Inscription en cours…" : "Créer mon compte"}
     </Button>
   );
 }

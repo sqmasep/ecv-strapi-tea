@@ -15,25 +15,36 @@ export default async function AccountPage() {
   const favorites: any[] = user.favorites ?? [];
 
   return (
-    <div className="container mx-auto p-6">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-4xl font-bold">Welcome back, {user.username}</h1>
+    <div className="container mx-auto px-4 py-10">
+      <div className="flex items-center justify-between mb-10">
+        <div>
+          <p className="text-sm text-muted-foreground mb-1">Bienvenue,</p>
+          <h1 className="text-4xl font-bold text-foreground">
+            {user.username}
+          </h1>
+        </div>
         <Form action={logout}>
-          <Button variant="destructive" type="submit">
-            <LogOut />
-            Logout
+          <Button variant="outline" type="submit" size="sm">
+            <LogOut className="w-4 h-4 mr-2" />
+            Déconnexion
           </Button>
         </Form>
       </div>
 
       <section>
-        <h2 className="text-2xl font-semibold mb-4">Your Favorites</h2>
+        <h2 className="text-2xl font-semibold text-foreground mb-6">
+          Vos Favoris
+        </h2>
         {favorites.length === 0 ? (
-          <p className="text-zinc-500">
-            No favorites yet. Browse teas and heart the ones you love!
-          </p>
+          <div className="text-center py-16 text-muted-foreground">
+            <span className="text-5xl block mb-4">🍵</span>
+            <p className="text-base">Aucun favori pour l'instant.</p>
+            <p className="text-sm mt-1">
+              Explorez nos thés et ajoutez-en à vos favoris !
+            </p>
+          </div>
         ) : (
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
             {favorites.map(tea => (
               <TeaCard
                 key={tea.id}

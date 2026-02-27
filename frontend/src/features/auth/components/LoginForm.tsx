@@ -12,27 +12,48 @@ export function LoginForm() {
   const [state, action] = useActionState(login, { error: "" });
 
   return (
-    <div className="container mx-auto min-h-screen grid place-content-center">
-      {state.error && <p className="text-red-500 mb-4">{state.error}</p>}
+    <div className="min-h-[80vh] flex items-center justify-center px-4 bg-linear-to-br from-primary/5 via-background to-accent/10">
+      <div className="w-full max-w-sm bg-card border border-border rounded-2xl shadow-md p-8">
+        <div className="text-center mb-8">
+          <span className="text-4xl block mb-3">🍵</span>
+          <h1 className="text-2xl font-bold text-foreground">Bon retour !</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Connectez-vous pour retrouver vos favoris
+          </p>
+        </div>
 
-      <h1 className="text-xl font-bold">Login</h1>
-      <Form action={action} className="mt-4 flex flex-col gap-4">
-        <Input type="email" name="email" placeholder="Email" required />
-        <Input
-          type="password"
-          name="password"
-          placeholder="Password"
-          required
-        />
-        <LoginButton />
-      </Form>
+        {state.error && (
+          <div className="mb-4 px-4 py-3 bg-destructive/10 border border-destructive/20 text-destructive text-sm rounded-lg">
+            {state.error}
+          </div>
+        )}
 
-      <p className="mt-4 text-center">
-        You don't have an account?{" "}
-        <Link href="/register" className="underline text-blue-300">
-          Register
-        </Link>
-      </p>
+        <Form action={action} className="flex flex-col gap-4">
+          <Input
+            type="email"
+            name="email"
+            placeholder="Adresse e-mail"
+            required
+          />
+          <Input
+            type="password"
+            name="password"
+            placeholder="Mot de passe"
+            required
+          />
+          <LoginButton />
+        </Form>
+
+        <p className="mt-6 text-center text-sm text-muted-foreground">
+          Pas encore de compte ?{" "}
+          <Link
+            href="/register"
+            className="text-primary font-medium hover:underline"
+          >
+            S'inscrire
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
@@ -42,7 +63,7 @@ function LoginButton() {
 
   return (
     <Button type="submit" disabled={pending}>
-      {pending ? "Logging in..." : "Log In"}
+      {pending ? "Connexion…" : "Se connecter"}
     </Button>
   );
 }

@@ -8,6 +8,7 @@ import {
 export function useTeaFilters() {
   return useQueryStates({
     type: parseAsArrayOf(parseAsString),
-    time: parseAsInteger,
+    maxTime: parseAsInteger,
+    maxTemp: parseAsInteger,
   });
 }

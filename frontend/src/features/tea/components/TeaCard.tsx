@@ -30,19 +30,21 @@ export function TeaCard({
     : null;
 
   return (
-    <div className="relative border border-zinc-100 rounded-sm overflow-hidden">
+    <div className="group relative bg-card border border-border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
       {imageUrl ? (
-        <div className="relative aspect-[4/3] w-full">
+        <div className="relative aspect-4/3 w-full overflow-hidden">
           <Image
             src={imageUrl}
             alt={image?.alternativeText ?? name}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
+          <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />
         </div>
       ) : (
-        <div className="aspect-[4/3] w-full bg-zinc-100 flex items-center justify-center text-zinc-400 text-sm">
-          No image
+        <div className="aspect-4/3 w-full bg-muted flex flex-col items-center justify-center gap-2 text-muted-foreground">
+          <span className="text-3xl">🍵</span>
+          <span className="text-xs">Aucune image</span>
         </div>
       )}
 
@@ -50,10 +52,12 @@ export function TeaCard({
         <FavoriteButton teaDocumentId={documentId} isFavorite={!!favorite} />
       )}
 
-      <div className="p-4">
-        <p className="font-medium mb-3">{name}</p>
-        <Button asChild className="w-full">
-          <Link href={`/teas/${slug}`}>Learn more</Link>
+      <div className="p-4 flex flex-col gap-3">
+        <p className="font-semibold text-foreground text-base leading-snug">
+          {name}
+        </p>
+        <Button asChild size="sm" className="w-full">
+          <Link href={`/teas/${slug}`}>Découvrir →</Link>
         </Button>
       </div>
     </div>

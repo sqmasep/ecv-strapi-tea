@@ -9,32 +9,45 @@ export async function Navbar() {
   const user = await getUser();
 
   return (
-    <div className="fixed top-0 h-14 flex items-center bg-zinc-400 w-full">
-      <div className="container mx-auto flex items-center w-full gap-8">
-        <Link href="/">{navbar.brand}</Link>
-        {/* <pre>{JSON.stringify(navbar, null, 2)}</pre> */}
+    <nav className="fixed top-0 h-16 flex items-center bg-card/95 backdrop-blur-sm border-b border-border w-full z-50 shadow-sm">
+      <div className="container mx-auto flex items-center w-full gap-6 px-4">
+        <Link
+          href="/"
+          className="text-xl font-bold text-primary tracking-tight shrink-0"
+        >
+          {navbar.brand}
+        </Link>
 
-        <div className="flex items-center gap-2">
-          <Link href="/teas">Teas</Link>
+        <div className="flex items-center gap-1">
+          <Link
+            href="/teas"
+            className="px-3 py-1.5 text-sm font-medium text-foreground/70 hover:text-primary hover:bg-primary/8 rounded-md transition-colors"
+          >
+            Les Thés
+          </Link>
         </div>
 
-        <Search />
+        <div className="grow max-w-xs">
+          <Search />
+        </div>
 
         <div className="flex items-center gap-2 ml-auto">
           {user ? (
-            <div>user!</div>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/account">Mon compte</Link>
+            </Button>
           ) : (
             <>
-              <Button asChild>
-                <Link href="/login">Login</Link>
+              <Button asChild variant="ghost" size="sm">
+                <Link href="/login">Connexion</Link>
               </Button>
-              <Button asChild variant="secondary">
-                <Link href="/register">Register</Link>
+              <Button asChild size="sm">
+                <Link href="/register">S&apos;inscrire</Link>
               </Button>
             </>
           )}
         </div>
       </div>
-    </div>
+    </nav>
   );
 }
