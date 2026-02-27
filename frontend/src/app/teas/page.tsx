@@ -1,9 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { TeaCard } from "@/features/tea/components/TeaCard";
 import { TeaFilters } from "@/features/tea/components/TeaFilters";
 import { fetchCollectionType } from "@/lib/strapi";
-import Link from "next/link";
 
 export default async function TeasPage() {
   const teas = await fetchCollectionType("teas");
@@ -20,7 +17,12 @@ export default async function TeasPage() {
 
         <div className="grid grid-cols-4">
           {teas.map(tea => (
-            <TeaCard key={tea.id} name={tea.name} slug={tea.slug} />
+            <TeaCard
+              // favorite={}
+              key={tea.id}
+              name={tea.name}
+              slug={tea.slug}
+            />
           ))}
         </div>
       </main>

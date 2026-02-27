@@ -84,7 +84,9 @@ export interface LayoutNavbar extends Struct.ComponentSchema {
   info: {
     displayName: 'Navbar';
   };
-  attributes: {};
+  attributes: {
+    test: Schema.Attribute.String;
+  };
 }
 
 export interface SharedOpenGraph extends Struct.ComponentSchema {

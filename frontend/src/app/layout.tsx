@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "antialiased min-h-screen flex flex-col pt-10",
+          "antialiased min-h-screen flex flex-col pt-14",
           geistSans.variable,
           geistMono.variable,
         )}

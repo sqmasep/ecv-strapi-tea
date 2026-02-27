@@ -537,6 +537,10 @@ export interface ApiTeaTea extends Struct.CollectionTypeSchema {
       ['dynamic-zone.illustration-section']
     >;
     excerpt: Schema.Attribute.String;
+    images: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
     infusionTime: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::tea.tea'> &

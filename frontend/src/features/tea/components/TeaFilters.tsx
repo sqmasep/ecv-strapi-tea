@@ -15,6 +15,8 @@ export function TeaFilters({
 }) {
   const [get, set] = useTeaFilters();
 
+  // return <pre>{JSON.stringify(types, null, 2)}</pre>;
+
   return (
     <div>
       <div className="uppercase font-semibold text-zinc-500">Tea types</div>
@@ -31,11 +33,12 @@ export function TeaFilters({
               onCheckedChange={checked => {
                 const current = get.type || [];
 
-                if (checked) {
-                  set({ type: [...current, type.name] });
-                } else {
-                  set({ type: current.filter(name => name !== type.name) });
-                }
+                set({
+                  type: [
+                    ...current.filter(name => name !== type.name),
+                    ...(checked ? [type.name] : []),
+                  ],
+                });
               }}
             />
             {type.name} ({type.teas.length})
@@ -46,8 +49,8 @@ export function TeaFilters({
       <div className="uppercase font-semibold text-zinc-500">Time</div>
 
       <Slider
-        value={get.time || 0}
-        onValueChange={value => set({ time: value })}
+        value={[get.time || 0]}
+        onValueChange={value => set({ time: value[0] })}
       />
     </div>
   );

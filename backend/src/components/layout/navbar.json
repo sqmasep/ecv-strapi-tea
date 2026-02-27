@@ -4,6 +4,10 @@
     "displayName": "Navbar"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "test": {
+      "type": "string"
+    }
+  },
   "config": {}
 }
