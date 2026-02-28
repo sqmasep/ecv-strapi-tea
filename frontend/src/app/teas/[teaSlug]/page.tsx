@@ -9,9 +9,9 @@ const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL ?? "";
 export async function generateMetadata({
   params,
 }: {
-  params: { teaSlug: Promise<string> };
+  params: Promise<{ teaSlug: string }>;
 }) {
-  const teaSlug = await params.teaSlug;
+  const { teaSlug } = await params;
   const tea = (
     await fetchCollectionType("teas", {
       filters: { slug: teaSlug },
@@ -24,9 +24,9 @@ export async function generateMetadata({
 export default async function TeaPage({
   params,
 }: {
-  params: { teaSlug: Promise<string> };
+  params: Promise<{ teaSlug: string }>;
 }) {
-  const teaSlug = await params.teaSlug;
+  const { teaSlug } = await params;
 
   const tea = (
     await fetchCollectionType("teas", {

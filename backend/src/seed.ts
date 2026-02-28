@@ -457,6 +457,119 @@ export async function seed(strapi: Core.Strapi) {
 
   const teaTypeIds = await seedTeaTypes(strapi);
   await seedTeas(strapi, teaTypeIds);
+  await seedStores(strapi);
+  await seedPermissions(strapi);
 
   strapi.log.info("[seed] Database seed complete.");
+}
+
+async function seedPermissions(strapi: Core.Strapi) {
+  // Grant "favorite.toggle" to the Authenticated role
+  const authenticatedRole = await strapi.db
+    .query("plugin::users-permissions.role")
+    .findOne({ where: { type: "authenticated" } });
+
+  if (!authenticatedRole) {
+    strapi.log.warn(
+      "[seed] Authenticated role not found, skipping permissions",
+    );
+    return;
+  }
+
+  const action = "api::tea.favorite.toggle";
+
+  const existing = await strapi.db
+    .query("plugin::users-permissions.permission")
+    .findOne({ where: { action, role: authenticatedRole.id } });
+
+  if (existing) {
+    if (!existing.enabled) {
+      await strapi.db.query("plugin::users-permissions.permission").update({
+        where: { id: existing.id },
+        data: { enabled: true },
+      });
+      strapi.log.info(`[seed] Permission enabled: ${action}`);
+    } else {
+      strapi.log.info(`[seed] Permission already enabled: ${action}`);
+    }
+    return;
+  }
+
+  await strapi.db.query("plugin::users-permissions.permission").create({
+    data: { action, role: authenticatedRole.id, enabled: true },
+  });
+  strapi.log.info(`[seed] Permission created: ${action}`);
+}
+
+const STORES: Array<{
+  name: string;
+  link: {
+    label: string;
+    URL: string;
+    target: "_blank" | "_self" | "_parent" | "_top" | "none";
+  };
+}> = [
+  {
+    name: "Palais des Thés",
+    link: {
+      label: "Visiter",
+      URL: "https://www.palaisdesthes.com",
+      target: "_blank",
+    },
+  },
+  {
+    name: "Mariage Frères",
+    link: {
+      label: "Visiter",
+      URL: "https://www.mariagefreres.com",
+      target: "_blank",
+    },
+  },
+  {
+    name: "Dammann Frères",
+    link: { label: "Visiter", URL: "https://www.dammann.fr", target: "_blank" },
+  },
+  {
+    name: "Comptoir Français du Thé",
+    link: {
+      label: "Visiter",
+      URL: "https://www.comptoirfrancaisduthe.com",
+      target: "_blank",
+    },
+  },
+  {
+    name: "Théodor",
+    link: { label: "Visiter", URL: "https://www.theodor.fr", target: "_blank" },
+  },
+  {
+    name: "O Thé Nature",
+    link: {
+      label: "Visiter",
+      URL: "https://www.othenature.fr",
+      target: "_blank",
+    },
+  },
+];
+
+async function seedStores(strapi: Core.Strapi) {
+  for (const store of STORES) {
+    const existing = await strapi.documents("api::store.store").findFirst({
+      filters: { name: store.name },
+    });
+
+    if (existing) {
+      strapi.log.info(`[seed] Store already exists, skipping: ${store.name}`);
+      continue;
+    }
+
+    await strapi.documents("api::store.store").create({
+      data: {
+        name: store.name,
+        link: store.link,
+      },
+      status: "published",
+    });
+
+    strapi.log.info(`[seed] Store created: ${store.name}`);
+  }
 }
